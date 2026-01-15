@@ -1,0 +1,5 @@
+1. cd "c:\Users\bdram\Desktop\Work\Pavulla\InsightFace\insightface"
+2. .\.venv311\Scripts\Activate.ps1
+3. python -c "import cv2; from insightface.app import FaceAnalysis; from pathlib import Path; imgs=[r'python-package\\insightface\\data\\images\\bball 1.jpg', r'python-package\\insightface\\data\\images\\fball 1.png', r'python-package\\insightface\\data\\images\\fball 2.jpg', r'python-package\\insightface\\data\\images\\portrait 1.png']; app=FaceAnalysis(providers=['CPUExecutionProvider']); app.prepare(ctx_id=0, det_size=(640,640)); import sys; \
+for p in imgs: img=cv2.imread(p); \
+    (print(f'FAIL missing {p}') if img is None else (lambda faces: (print(f'{p}: {len(faces)} faces'), cv2.imwrite(str(Path(p).with_stem(Path(p).stem+'_out')), app.draw_on(img, faces))))(app.get(img))"
